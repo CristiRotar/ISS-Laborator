@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="412.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FarmacistMainView">
+   <children>
+      <TableView fx:id="tableComenzi" layoutX="68.0" layoutY="74.0" prefHeight="200.0" prefWidth="280.0">
+        <columns>
+          <TableColumn fx:id="columnFromComanda" prefWidth="89.0" text="From" />
+            <TableColumn fx:id="columnStatusComanda" prefWidth="82.0" text="Status" />
+            <TableColumn fx:id="columnData" prefWidth="108.0" text="Data" />
+        </columns>
+      </TableView>
+      <Label layoutX="68.0" layoutY="38.0" text="Comenzi" />
+      <Label layoutX="413.0" layoutY="38.0" text="Medicamente comanda" />
+      <TableView layoutX="413.0" layoutY="74.0" prefHeight="200.0" prefWidth="297.0">
+        <columns>
+          <TableColumn fx:id="columnNumeMedicament" prefWidth="75.0" text="Nume" />
+          <TableColumn fx:id="columnProducatorMedicament" prefWidth="75.0" text="Producator" />
+            <TableColumn fx:id="columnTipMedicament" prefWidth="75.0" text="Tip" />
+            <TableColumn fx:id="columnCantitateMedicament" prefWidth="75.0" text="Cantitate" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnOnoreaza" layoutX="66.0" layoutY="318.0" mnemonicParsing="false" onAction="#handleOnoreaza" text="Onoreaza comanda" />
+      <Button fx:id="btnRefuza" layoutX="66.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleRefuza" prefHeight="25.0" prefWidth="120.0" text="Refuza comanda" />
+      <Button fx:id="btnGestioneaza" layoutX="456.0" layoutY="331.0" mnemonicParsing="false" onAction="#handleGestioneaza" text="Gestioneaza Medicamente" />
+   </children>
+</AnchorPane>
