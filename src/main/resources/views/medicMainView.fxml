@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="452.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MedicMainView">
+<AnchorPane prefHeight="452.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MedicController">
    <children>
       <TableView fx:id="tableComenzi" layoutX="46.0" layoutY="64.0" prefHeight="287.0" prefWidth="278.0">
         <columns>
@@ -13,7 +13,7 @@
         </columns>
       </TableView>
       <Label layoutX="46.0" layoutY="31.0" text="Comenzile mele" />
-      <Button fx:id="btnAnuleaza" layoutX="46.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleAnuleaza" text="Anuleaza comanda" />
-      <Button fx:id="btnIregistreaza" layoutX="193.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleInregistreaza" text="Inregistreaza comanda" />
+      <Button id="btnAnuleaza" layoutX="46.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleAnuleaza" text="Anuleaza comanda" />
+      <Button id="btnIregistreaza" layoutX="193.0" layoutY="376.0" mnemonicParsing="false" onAction="#handleInregistreaza" text="Inregistreaza comanda" />
    </children>
 </AnchorPane>

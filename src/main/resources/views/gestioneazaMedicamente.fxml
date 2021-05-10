@@ -3,10 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GestioneazaMedicamente">
+<AnchorPane prefHeight="400.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GestionareController">
    <children>
-      <TableView fx:id="tableMedicamente" layoutX="43.0" layoutY="74.0" prefHeight="277.0" prefWidth="300.0">
+      <TableView fx:id="tableMedicamente" layoutX="43.0" layoutY="74.0" onMouseClicked="#fill" prefHeight="277.0" prefWidth="300.0">
         <columns>
           <TableColumn fx:id="columnNume" prefWidth="75.0" text="Nume" />
           <TableColumn fx:id="columnProducator" prefWidth="75.0" text="Producator" />

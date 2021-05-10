@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="412.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.FarmacistMainView">
+<AnchorPane prefHeight="412.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FarmacistController">
    <children>
       <TableView fx:id="tableComenzi" layoutX="68.0" layoutY="74.0" prefHeight="200.0" prefWidth="280.0">
         <columns>
