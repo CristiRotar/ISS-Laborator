@@ -1,3 +1,3 @@
 # ISS-Laborator
 
-Prototipul interfetri grafice se afla in branch-ul master
+Aplicatia se afla in branch-ul master
