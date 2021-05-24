@@ -1,6 +1,7 @@
 package repository;
 
 import model.Comanda;
+import model.TipStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -39,6 +40,16 @@ public class BDComandaRepository implements ComandaRepository {
                 return null;
             }
         }
+    }
+
+    @Override
+    public void update(Integer id, TipStatus status) {
+
+    }
+
+    @Override
+    public Integer getMaxId() {
+        return null;
     }
 
     @Override

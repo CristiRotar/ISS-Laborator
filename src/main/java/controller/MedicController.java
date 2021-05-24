@@ -2,85 +2,147 @@ package controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Comanda;
-import model.Medic;
-import model.User;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import model.*;
 import service.IService;
+import service.Service;
 import service.ServicesException;
+import utils.events.Event;
+import utils.observer.Observer;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
+
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class MedicController {
 
+public class MedicController implements RolController, Observer {
+
+    public MedicController() {
+    }
+
+    @FXML
+    private TextField nameTextField;
     @FXML
     private TableView<Comanda> tableComenzi;
     @FXML
     private TableColumn<Comanda, Integer> columnId;
     @FXML
-    private TableColumn<Comanda, String> columnStatus;
+    private TableColumn<Comanda, LocalDate> columnData;
     @FXML
-    private TableColumn<Comanda, String> columnData;
+    private TableColumn<Comanda, TipStatus> columnStatus;
+
 
     ObservableList<Comanda> comenziModel = FXCollections.observableArrayList();
 
-    private IService service;
+    private Service service;
     private Medic medic;
 
-    public void setService(IService service){
+    @Override
+    public void setService(Service service) {
         this.service = service;
+        service.addObserver(this);
     }
 
-    public void setUser(Medic crtAgent) {
-        this.medic = crtAgent;
-    }
-
-    public void handleAnuleaza(ActionEvent actionEvent) {
-    }
-
-    public void handleInregistreaza(ActionEvent actionEvent) {
+    @Override
+    public void setUser(User user) {
+        this.medic = new Medic(user);
+        nameTextField.setText(user.getName());
+        loadComenzi();
     }
 
     @FXML
-    public void initialize(){
+    public void handleLogout() throws IOException {
+        List<Window> open = Stage.getWindows().stream().filter(Window::isShowing).collect(Collectors.toList());
+        open.forEach(Window::hide);
+        loadLoginStage();
     }
 
-    public void initComenziModel(){
-        try{
+    public void loadComenzi() {
+        initComenziModel();
+        initializeComenziTable();
+    }
+
+    public void initComenziModel() {
+        try {
             comenziModel.clear();
-            List<Comanda> excursii =
-                    StreamSupport.stream(service.findMyOrders(medic).spliterator(), false)
-                            .collect(Collectors.toList());
-            comenziModel.setAll(excursii);
-        }catch(ServicesException ex){
-            showNotification("Date invalide!", Alert.AlertType.ERROR);
+            List<Comanda> comenzi = StreamSupport.stream(service.findMyOrders(medic).spliterator(), false).collect(Collectors.toList());
+            comenziModel.setAll(comenzi);
+        } catch (ServicesException ex) {
+            MessageAlert.showErrorMessage(null, ex.getMessage());
         }
-
     }
 
-    public void initializeComenziTable(){
+
+    public void initializeComenziTable() {
         columnId.setCellValueFactory(new PropertyValueFactory<Comanda, Integer>("Id"));
-        columnStatus.setCellValueFactory(new PropertyValueFactory<Comanda, String>("Status"));
-        columnData.setCellValueFactory(new PropertyValueFactory<Comanda, String>("Data"));
+        columnData.setCellValueFactory(new PropertyValueFactory<Comanda, LocalDate>("Data"));
+        columnStatus.setCellValueFactory(new PropertyValueFactory<Comanda, TipStatus>("Status"));
         tableComenzi.setItems(comenziModel);
-
-    }
-
-    private void showNotification(String message, Alert.AlertType type){
-        Alert alert=new Alert(type);
-        alert.setTitle("Notification");
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
 
+    @FXML
+    public void handleAnuleaza() {
+        Comanda comanda = tableComenzi.getSelectionModel().getSelectedItem();
+        if(comanda == null)
+            MessageAlert.showErrorMessage(null, "Trebuie sa selectati o comanda!");
+        else{
+            try {
+
+                service.anuleazaComanda(comanda);
+            } catch(ServicesException ex) {
+                MessageAlert.showErrorMessage(null, ex.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    public void handleInregistreaza() {
+        try {
+            loadComenziStage();
+        } catch (IOException ex) {
+            MessageAlert.showErrorMessage(null, ex.getMessage());
+        }
+    }
+
+    private void loadComenziStage() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/views/inregistreazaComanda.fxml"));
+        AnchorPane rootLayout = loader.load();
+        stage.setScene(new Scene(rootLayout));
+        ComandaController controller = (ComandaController)loader.getController();
+        controller.setService(service);
+        controller.setMedic(medic);
+        stage.show();
+    }
+
+    private void loadLoginStage() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/views/loginView.fxml"));
+        AnchorPane rootLayout = loader.load();
+        stage.setScene(new Scene(rootLayout));
+        LoginController controller = loader.getController();
+        controller.setService(service);
+        stage.show();
+    }
+
+    @Override
+    public void update(Event e) {
+        initComenziModel();
+    }
 }

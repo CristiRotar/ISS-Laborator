@@ -9,8 +9,8 @@ public class MedicamentValidator implements Validator<Medicament> {
         if(entity.getNume().length() == 0)
             err.append("Nume invalid!\n");
         if(entity.getProducator().length() == 0)
-            err.append("Parola invalida!\n");
-        if(entity.getCantitateTotala() < 0)
+            err.append("Producator invalid!\n");
+        if(entity.getCantitateTotala()== null || entity.getCantitateTotala() < 0)
             err.append("Cantitate invalida");
 
         if(err.length() > 0)

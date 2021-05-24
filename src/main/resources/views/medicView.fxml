@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="452.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MedicController">
+   <children>
+      <TableView fx:id="tableComenzi" layoutX="46.0" layoutY="95.0" prefHeight="287.0" prefWidth="278.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="90.0" text="Id" />
+          <TableColumn fx:id="columnStatus" prefWidth="87.0" text="Status" />
+            <TableColumn fx:id="columnData" prefWidth="100.0" text="Data" />
+        </columns>
+      </TableView>
+      <Label layoutX="46.0" layoutY="62.0" text="Comenzile mele" />
+      <Button id="btnAnuleaza" layoutX="46.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleAnuleaza" text="Anuleaza comanda" />
+      <Button id="btnIregistreaza" layoutX="193.0" layoutY="399.0" mnemonicParsing="false" onAction="#handleInregistreaza" text="Inregistreaza comanda" />
+      <Button layoutX="264.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleLogout" text="Log Out" />
+      <TextField fx:id="nameTextField" editable="false" layoutX="108.0" layoutY="18.0" />
+   </children>
+</AnchorPane>

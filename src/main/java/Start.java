@@ -1,13 +1,12 @@
-import controller.FarmacistController;
 import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Comanda;
 import model.Medicament;
+import model.validators.ComandaValidator;
 import model.validators.MedicamentValidator;
 import model.validators.Validator;
 import org.hibernate.SessionFactory;
@@ -15,8 +14,11 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import repository.*;
-import service.IService;
 import service.Service;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 
 public class Start extends Application {
 
@@ -53,12 +55,26 @@ public class Start extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         initialize();
+
+        Properties props=new Properties();
+        try {
+            props.load(new FileReader("bd.properties"));
+        } catch (IOException e) {
+            System.out.println("Cannot find bd.properties "+ e);
+        }
+
         FarmacistRepository farmacistRepository =new BDFarmacistRepository(sessionFactory);
         MedicRepository medicRepository =new BDMedicRepository(sessionFactory);
-        ComandaRepository comandaRepository = new BDComandaRepository(sessionFactory);
         MedicamentRepository medicamentRepository = new BDMedicamentRepository(sessionFactory);
-        MedicamentValidator medicamentValidator = new MedicamentValidator();
-        IService service = new Service(farmacistRepository, medicRepository, comandaRepository, medicamentRepository, medicamentValidator);
+        MedicamentComandaRepository medicamentComandaRepository = new BDMedicamentComandaRepository(props, medicamentRepository);
+        ComandaRepository comandaRepository = new BDComandaRepositoryClasic(props, medicamentComandaRepository);
+
+
+        Validator<Medicament> medicamentValidator = new MedicamentValidator();
+        Validator<Comanda> comandaValidator = new ComandaValidator();
+
+        Service service = new Service(farmacistRepository, medicRepository, comandaRepository, medicamentRepository, medicamentComandaRepository, medicamentValidator, comandaValidator);
+
         FXMLLoader LogInLoader = new FXMLLoader();
         LogInLoader.setLocation(getClass().getResource("/views/loginView.fxml"));
         AnchorPane LogInLayout = LogInLoader.load();
@@ -67,8 +83,8 @@ public class Start extends Application {
         primaryStage.setScene(loginScene);
         loginController.setService(service);
 
+
         primaryStage.show();
-        primaryStage.setWidth(600);
 
     }
 }

@@ -6,17 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.time.LocalDate;
 import java.util.List;
 
 @javax.persistence.Entity
 @Table(name = "Comenzi")
 public class Comanda extends Entity<Integer> {
     private String medicUsername;
-    private String data;
+    private LocalDate data;
     private TipStatus status;
     private List<MedicamentComanda> medicamente;
 
-    public Comanda(String medicUsername, String data, TipStatus status, List<MedicamentComanda> medicamente) {
+    public Comanda(String medicUsername, LocalDate data, TipStatus status, List<MedicamentComanda> medicamente) {
         this.medicUsername = medicUsername;
         this.data = data;
         this.status = status;
@@ -47,11 +48,11 @@ public class Comanda extends Entity<Integer> {
         this.medicUsername = medicUsername;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

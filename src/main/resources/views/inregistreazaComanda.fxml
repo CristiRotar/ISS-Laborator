@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="499.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.InregistreazaComanda">
+<AnchorPane prefHeight="499.0" prefWidth="793.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ComandaController">
    <children>
       <TableView fx:id="tableMedicamente" layoutX="46.0" layoutY="87.0" prefHeight="200.0" prefWidth="302.0">
         <columns>
@@ -20,7 +20,7 @@
       <Separator layoutX="394.0" layoutY="-14.0" orientation="VERTICAL" prefHeight="455.0" prefWidth="5.0" />
       <TableView fx:id="tableComanda" layoutX="437.0" layoutY="87.0" prefHeight="200.0" prefWidth="302.0">
         <columns>
-          <TableColumn fx:id="columnNumeCOmanda" prefWidth="75.0" text="Nume" />
+          <TableColumn fx:id="columnNumeComanda" prefWidth="75.0" text="Nume" />
           <TableColumn fx:id="columnProducatorComanda" prefWidth="75.0" text="Producator" />
             <TableColumn fx:id="columnTipComanda" prefWidth="75.0" text="Tip" />
             <TableColumn fx:id="columnCantitateComanda" prefWidth="75.0" text="Cantitate" />

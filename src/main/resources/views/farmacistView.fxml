@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="440.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FarmacistController">
+   <children>
+      <TableView fx:id="tableComenzi" layoutX="68.0" layoutY="111.0" onMouseClicked="#initMedicamente" prefHeight="200.0" prefWidth="280.0">
+        <columns>
+          <TableColumn fx:id="columnFromComanda" prefWidth="89.0" text="From" />
+            <TableColumn fx:id="columnStatusComanda" prefWidth="82.0" text="Status" />
+            <TableColumn fx:id="columnData" prefWidth="108.0" text="Data" />
+        </columns>
+      </TableView>
+      <Label layoutX="68.0" layoutY="78.0" text="Comenzi" />
+      <Label layoutX="413.0" layoutY="73.0" text="Medicamente comanda" />
+      <TableView fx:id="tableMedicamente" layoutX="413.0" layoutY="108.0" prefHeight="200.0" prefWidth="297.0">
+        <columns>
+          <TableColumn fx:id="columnNumeMedicament" prefWidth="75.0" text="Nume" />
+          <TableColumn fx:id="columnProducatorMedicament" prefWidth="75.0" text="Producator" />
+            <TableColumn fx:id="columnTipMedicament" prefWidth="75.0" text="Tip" />
+            <TableColumn fx:id="columnCantitateMedicament" prefWidth="75.0" text="Cantitate" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnOnoreaza" layoutX="66.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleOnoreaza" text="Onoreaza comanda" />
+      <Button fx:id="btnRefuza" layoutX="66.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleRefuza" prefHeight="25.0" prefWidth="120.0" text="Refuza comanda" />
+      <Button fx:id="btnGestioneaza" layoutX="456.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleGestioneaza" text="Gestioneaza Medicamente" />
+      <TextField fx:id="nameTextField" editable="false" layoutX="66.0" layoutY="36.0" />
+      <Button layoutX="651.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleLogout" text="Log Out" />
+   </children>
+</AnchorPane>

@@ -3,15 +3,14 @@ package model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @javax.persistence.Entity
 @Table(name = "Medicamente")
 public class Medicament extends Entity<Integer> {
     private String nume;
     private String producator;
+
     private TipMedicament tip;
     private Integer cantitateTotala;
 
@@ -54,6 +53,8 @@ public class Medicament extends Entity<Integer> {
         this.producator = producator;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tip")
     public TipMedicament getTip() {
         return tip;
     }

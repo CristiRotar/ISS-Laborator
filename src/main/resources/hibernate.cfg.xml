@@ -18,7 +18,7 @@
 
         <mapping class="model.Farmacist"/>
         <mapping class="model.Medic"/>
-        <mapping class="model.Comanda"/>
+<!--        <mapping class="model.Comanda"/>-->
         <mapping class="model.Medicament"/>
 <!--        <mapping resource="Farmacist.hbm.xml"/>-->
 

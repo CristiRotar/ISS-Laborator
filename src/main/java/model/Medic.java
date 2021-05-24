@@ -21,6 +21,10 @@ public class Medic extends User {
         super(username, password);
     }
 
+    public Medic(User user){
+        super(user.getUsername(), user.getPassword(), user.getName());
+    }
+
     @Id
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy="increment")
